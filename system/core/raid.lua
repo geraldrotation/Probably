@@ -16,8 +16,9 @@ ProbablyEngine.raid.acquireTank = function()
 end
 
 ProbablyEngine.raid.build = function()
+  ProbablyEngine.raid.roster = {}
   if UnitInRaid("player") then
-    for i = 1, GetNumGroupMembers() do
+    for i = 1, 40 do
       local name, rank, subgroup, level, class, fileName, zone, online, isDead = GetRaidRosterInfo(i);
       if online and UnitExists('raid' .. i)  then
         ProbablyEngine.raid.roster['raid' .. i] = UnitHealth('raid' .. i)
@@ -30,8 +31,9 @@ ProbablyEngine.raid.build = function()
         ProbablyEngine.raid.roster['party' .. i] = UnitHealth('party' .. i)
       end
     end
+  else
+    ProbablyEngine.raid.roster['player'] = UnitHealth('player')
   end
-  ProbablyEngine.raid.roster['player'] = UnitHealth('player')
 end
 
 
